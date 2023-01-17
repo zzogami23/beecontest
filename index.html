@@ -31,6 +31,27 @@ height:100px;
 border-radius:50%;
 position:relative;
 }
+#pA {
+width:20px;
+height:20px;
+/*background-color:blue;*/
+border-radius:50%;
+position:relative;
+}
+#pB {
+width:20px;
+height:20px;
+/*background-color:blue;*/
+border-radius:50%;
+position:relative;
+}
+#pO {
+width:20px;
+height:20px;
+/*background-color:blue;*/
+border-radius:50%;
+position:relative;
+}
 </style>
 <body>
 <br><br><br><br><br><br>
@@ -38,9 +59,19 @@ position:relative;
 <img id="b1" src="bee1.gif" draggable="false" /><br>
 <img id="b2" src="bee2.gif" draggable="false" /><br>
 <img id="b3" src="bee3.gif" draggable="false" /><br>
+
+<img id="pA" src="A.png" draggable="false" />
+<img id="pO" src="O.png" draggable="false" />
+<img id="pB" src="B.png" draggable="false" />
 <!--<div id="open"></div>-->
 
-<p id="img-left"></p>
+<p id="img-left">
+A、B两地相距600m
+小蜜蜂b1从A点<br>
+小蜜蜂b3从B点<br>
+以每分钟10m的速度相向飞行<br>
+小蜜蜂b2在A、B两地的中点O,以同样的速度先向小蜜蜂b3飞行，二者相遇后小蜜蜂b2改向小蜜蜂b1飞行<br>
+</p>
 <p id="img-top"></p>
 
 <p id="img-left1"></p>
@@ -114,7 +145,14 @@ document.getElementById("img-left3").innerHTML=bv.style.left.toString();
 }
 //ImageBeeMove3('b3');
 
-
+function ImageBeeInit2(ImgId,x){
+//获取元素
+var bv = document.getElementById(ImgId);
+bv.style.left =x+ 'px';
+}
+ImageBeeInit2('pA',0);
+ImageBeeInit2('pO',300);
+ImageBeeInit2('pB',600);
 function ImageBeeInit3(ImgId,x){
 //获取元素
 var bv = document.getElementById(ImgId);
@@ -124,8 +162,9 @@ document.getElementById("img-left3").innerHTML+="<br>"+ImgId+":"+bv.style.left.t
 }
 
 ImageBeeInit3('b1',0);
-ImageBeeInit3('b2',0);
-ImageBeeInit3('b3',1200);
+ImageBeeInit3('b2',300);
+ImageBeeInit3('b3',600);
+
 var si=setInterval(function(){time()},100);
 var b1count=0;
 var b2count=0;
@@ -167,19 +206,19 @@ return;
 }
 timecount+=0.1;
 document.getElementById("img-top").innerHTML="<br>当前时间:"+timecount.toFixed(1) +"分钟"  ;
-b1l = b1.offsetLeft+7;
+b1l = b1.offsetLeft+1;
 b1.style.left =b1l+'px';
-b1count+=7;
+b1count+=1;
 document.getElementById("img-left1").innerHTML="<br>b1位置:"+b1.style.left.toString() .replace("px","m")+"<br>b1行程:"+b1count+"m"   ;
 
-b2l = b2.offsetLeft+b2flag*20;
+b2l = b2.offsetLeft+b2flag*1;
 b2.style.left =b2l+'px';
-b2count+=20;
+b2count+=1;
 document.getElementById("img-left2").innerHTML="<br>b2位置:"+b2.style.left.toString().replace("px","m")+"<br>b2行程:"+b2count +"m"  ;
 
-b3l = b3.offsetLeft+b3flag*5;
+b3l = b3.offsetLeft+b3flag*1;
 b3.style.left =b3l+'px';
-b3count+=5;
+b3count+=1;
 document.getElementById("img-left3").innerHTML="<br>b3位置:"+b3.style.left.toString().replace("px","m") +"<br>b3行程:"+b3count+"m"   ;
 }
 </script>
