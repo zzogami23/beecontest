@@ -35,9 +35,9 @@ position:relative;
 <body>
 
 <!--draggable 是否禁止拖曳-->
-<img id="b1" src="elephant.gif" draggable="false" /><br>
-<img id="b2" src="cow.jpg" draggable="false" /><br>
-<img id="b3" src="lion.gif" draggable="false" /><br>
+<img id="b1" src="bee1.gif" draggable="false" /><br>
+<img id="b2" src="bee1.gif" draggable="false" /><br>
+<img id="b3" src="bee1.gif" draggable="false" /><br>
 <!--<div id="open"></div>-->
 
 <p id="img-left"></p>
@@ -126,7 +126,7 @@ document.getElementById("img-left3").innerHTML+="<br>"+ImgId+":"+bv.style.left.t
 ImageBeeInit3('b1',0);
 ImageBeeInit3('b2',0);
 ImageBeeInit3('b3',1200);
-setInterval(function(){time()},100);
+var si=setInterval(function(){time()},100);
 var b1count=0;
 var b2count=0;
 var b3count=0;
@@ -142,37 +142,45 @@ function time()
 	var b3 = document.getElementById('b3');
 if(b2.offsetLeft>=b3.offsetLeft )
 {
+if(b2flag!=b3flag)
+{
 alert('b2,b3相遇');
 
 	b2flag=-1;
 }
+}
 if(b2.offsetLeft<=b1.offsetLeft )
+{
+if(b2flag!=b1flag)
 {
 alert('b2,b1相遇');
 	b2flag=1;
 }
+}
 if(b1.offsetLeft==b3.offsetLeft )
 {
-clearInterval();
+if(b1flag!=b3flag){
+clearInterval(si);
 	alert('b1,b3相遇');
-
+return;
+}
 }
 timecount+=0.1;
 document.getElementById("img-top").innerHTML="<br>当前时间:"+timecount.toFixed(1) +"分钟"  ;
 b1l = b1.offsetLeft+7;
 b1.style.left =b1l+'px';
 b1count+=7;
-document.getElementById("img-left1").innerHTML="<br>b1位置:"+b1.style.left.toString() +"<br>b1行程:"+b1count   ;
+document.getElementById("img-left1").innerHTML="<br>b1位置:"+b1.style.left.toString() .replace("px","m")+"<br>b1行程:"+b1count+"m"   ;
 
 b2l = b2.offsetLeft+b2flag*20;
 b2.style.left =b2l+'px';
 b2count+=20;
-document.getElementById("img-left2").innerHTML="<br>b2位置:"+b2.style.left.toString() +"<br>b2行程:"+b2count   ;
+document.getElementById("img-left2").innerHTML="<br>b2位置:"+b2.style.left.toString().replace("px","m")+"<br>b2行程:"+b2count +"m"  ;
 
 b3l = b3.offsetLeft+b3flag*5;
 b3.style.left =b3l+'px';
 b3count+=5;
-document.getElementById("img-left3").innerHTML="<br>b3位置:"+b3.style.left.toString() +"<br>b3行程:"+b3count   ;
+document.getElementById("img-left3").innerHTML="<br>b3位置:"+b3.style.left.toString().replace("px","m") +"<br>b3行程:"+b3count+"m"   ;
 }
 </script>
 <script>
